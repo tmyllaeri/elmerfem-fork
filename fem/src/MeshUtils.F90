@@ -22091,7 +22091,7 @@ CONTAINS
 
     DEALLOCATE(EdgeUses,EdgeToFaceMap)
 
-#if 0
+#if 1
     ! For debugging reasons we may want to save the edges. 
     ! plot3(sharp(
     OPEN( 10, FILE = 'sharp.dat' )    
