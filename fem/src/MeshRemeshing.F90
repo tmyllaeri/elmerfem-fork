@@ -1554,8 +1554,8 @@ SUBROUTINE RemeshMMG3D(Model, InMesh,OutMesh,EdgePairs,PairCount,&
     IF( mmgloops > 1 ) THEN
       !! Redoing adaptive mesh, release the previous mmg mesh
       CALL MMG3D_Free_all((/MMG5_ARG_start, &
-          MMG5_ARG_ppMesh,LOC(mmgMesh),MMG5_ARG_ppMet,LOC(mmgSol), MMG5_ARG_end/), ier)      
-      IF ( ier == 0 ) CALL Fatal(FuncName,'Call to MMG3D_Free_all failed!')
+          MMG5_ARG_ppMesh,LOC(mmgMesh),MMG5_ARG_ppMet,LOC(mmgSol), MMG5_ARG_end/), ierr)      
+      IF ( ierr == 0 ) CALL Fatal(FuncName,'Call to MMG3D_Free_all failed!')
     END IF
         
     ! Enable external depende on "mmg loop"
@@ -1565,8 +1565,8 @@ SUBROUTINE RemeshMMG3D(Model, InMesh,OutMesh,EdgePairs,PairCount,&
     mmgSol  = 0
     CALL MMG3D_Init_mesh((/MMG5_ARG_start, &
         MMG5_ARG_ppMesh,LOC(mmgMesh),MMG5_ARG_ppMet,LOC(mmgSol), &
-        MMG5_ARG_end/), ier)
-    IF ( ier == 0 ) CALL Fatal(FuncName,'Call to MMG3D_Init_mesh failed!')
+        MMG5_ARG_end/), ierr)
+    IF ( ierr == 0 ) CALL Fatal(FuncName,'Call to MMG3D_Init_mesh failed!')
 
     IF(MultipleInputs) THEN
       CALL ListAddConstReal(FuncParams, 'adaptive min h', hminarray(mmgloops, 1))
@@ -1714,8 +1714,8 @@ SUBROUTINE RemeshMMG3D(Model, InMesh,OutMesh,EdgePairs,PairCount,&
   ! Release the mesh from mmg mesh format
   CALL MMG3D_Free_all((/MMG5_ARG_start, &
   MMG5_ARG_ppMesh,LOC(mmgMesh),MMG5_ARG_ppMet,LOC(mmgSol), &
-  MMG5_ARG_end/), ier)
-  IF ( ier == 0 ) CALL Fatal(FuncName,'Call to MMG3D_Free_all failed!')
+  MMG5_ARG_end/), ierr)
+  IF ( ierr == 0 ) CALL Fatal(FuncName,'Call to MMG3D_Free_all failed!')
 
   NBulk = OutMesh % NumberOfBulkElements
   NBdry = OutMesh % NumberOfBoundaryElements
@@ -2902,8 +2902,8 @@ SUBROUTINE DistributedRemeshParMMG(Model, InMesh,OutMesh,EdgePairs,PairCount,&
       !! Redoing adaptive mesh, release the previous mmg mesh
       CALL MMG3D_Free_all((/MMG5_ARG_start, &
           MMG5_ARG_ppMesh,LOC(mmgMesh),MMG5_ARG_ppMet,LOC(mmgSol), &
-          MMG5_ARG_end/), ier)
-          IF ( ier == 0 ) CALL Fatal(FuncName,'Call to MMG3D_Free_all failed!')
+          MMG5_ARG_end/), ierr)
+          IF ( ierr == 0 ) CALL Fatal(FuncName,'Call to MMG3D_Free_all failed!')
     END IF
     
     IF( mmgloops == MaxRemeshIter ) GOTO 20
